@@ -1,2 +1,2 @@
 # alx-system_engineering-devops
-I am at ALX school
+This is for writing script and printing of current working directory
