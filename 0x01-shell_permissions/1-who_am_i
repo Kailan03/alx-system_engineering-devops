@@ -1,2 +1,2 @@
 #!/bin/bash
-Effectiveuser name:$USER
+whoami
