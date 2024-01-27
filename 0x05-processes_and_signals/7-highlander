@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
-# Kill the 7-highlander process when receiving a SIGTERM signal
+# Display "To infinity and beyond" indefinitely with a sleep of 2 seconds
 # shellcheck disable=SC2009
 
-trap 'kill $(pgrep -o 7-highlander) && echo "7-highlander process killed"; exit' SIGTERM
+# Print "I am invincible!!!" on receiving a SIGTERM signal
+
+terminate() {
+    echo "I am invincible!!!"
+    exit
+}
+
+trap terminate SIGTERM
 
 while true; do
     echo "To infinity and beyond"

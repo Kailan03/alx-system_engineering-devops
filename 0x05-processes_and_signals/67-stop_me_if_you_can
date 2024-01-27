@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
-# Display "To infinity and beyond" indefinitely with a sleep of 2 seconds
+# Kill the 7-highlander process when receiving a SIGTERM signal
 # shellcheck disable=SC2009
 
-# Print "I am invincible!!!" on receiving a SIGTERM signal
-
-trap 'echo "I am invincible!!!"; exit' SIGTERM
-
-while true; do
-    echo "To infinity and beyond"
-    sleep 2
-done
+# Get the PID of the 7-highlander process
+highlander_pid=$(pgrep -o 7-highland)
