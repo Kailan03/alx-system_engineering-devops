@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# This script displays formatted information about users from /etc/passwd using a while loop.
+# shellcheck disable=SC2009
+
+while IFS=: read -r username password userid groupid user_info home_directory shell; do
+    echo "The user $username is part of the $groupid gang, lives in $home_directory, and rides $shell."
+    echo "User ID's place is protected by the passcode $password, more info about the user here: $user_info"
+done < /etc/passwd
+
