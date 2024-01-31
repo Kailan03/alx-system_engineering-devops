@@ -14,8 +14,5 @@ input_string = ARGV[0]
 match_result = input_string.match(/hb[t]+n/i)
 
 # Check if there is a match and print the result
-if match_result && match_result.length > 0
-  puts "#{match_result.join}"
-else
-  puts ""
+puts match_result.join if match_result
 end
