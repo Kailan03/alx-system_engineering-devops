@@ -11,7 +11,7 @@ end
 input_string = ARGV[0]
 
 # Use the Oniguruma regular expression to match the specified patterns
-match_result = input_string.scan(/h(b{1,3})tn/)
+match_result = input_string.scan(/h(b{1,3})tn/i)
 
 # Check if there is a match and print the result
 if match_result.length > 0
@@ -19,4 +19,3 @@ if match_result.length > 0
 else
   puts ""
 end
-
