@@ -15,7 +15,7 @@ match_result = input_string.match(/hb[t]+n/i)
 
 # Check if there is a match and print the result
 if match_result && match_result.length > 0
-  puts "#{match_result[0]}"
+  puts "#{match_result.join}"
 else
   puts ""
 end
