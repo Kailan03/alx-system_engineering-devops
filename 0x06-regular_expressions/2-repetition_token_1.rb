@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # Check if the command-line argument is provided
 # shellcheck disable=SC2009
-#
+
 if ARGV.length != 1
   puts "Usage: #{$PROGRAM_NAME} <input_string>"
   exit 1
@@ -19,3 +19,4 @@ if match_result.length > 0
 else
   puts ""
 end
+
