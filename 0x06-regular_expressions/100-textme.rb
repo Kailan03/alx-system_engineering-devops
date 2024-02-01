@@ -1,23 +1,25 @@
 #!/usr/bin/env ruby
 
-def extract_information(text)
-  # Define a regular expression pattern using Oniguruma syntax
-  pattern = Oniguruma.new('(?<sender>[\w\s\+\(\)-]+),(?<receiver>[\w\s\+\(\)-]+),(?<flags>[\w,]+)')
+# Check if the command-line argument is provided
+if ARGV.length != 1
+  puts "Usage: #{$PROGRAM_NAME} <input_string>"
+  exit 1
+end
 
-  # Use Oniguruma to match the pattern in the given text
-  match = pattern.match(text)
+# Extract the input string from the command-line argument
+input_string = ARGV[0]
 
-  if match
-    # Extract information from the named captures
-    sender = match['sender']
-    receiver = match['receiver']
-    flags = match['flags']
+# Use the Oniguruma regular expression to match and extract named groups
+match_result = input_string.match(/\[from:(?<sender>.*?)\]\[to:(?<receiver>.*?)\]\[flags:(?<flags>.*?)\]/)
 
-    # Output the extracted information
-    puts "Sender: #{sender}"
-    puts "Receiver: #{receiver}"
-    puts "Flags: #{flags}"
-  else
-    puts ""
-  end
+# Check if there is a match and print the result
+if match_result
+  sender = match_result['sender']
+  receiver = match_result['receiver']
+  flags = match_result['flags']
+
+  # Output the extracted information
+  puts "#{sender},#{receiver},#{flags}"
+else
+  puts "No match found."
 end
