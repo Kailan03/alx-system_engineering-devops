@@ -10,7 +10,7 @@ end
 input_string = ARGV[0]
 
 # Use the Oniguruma regular expression to match the specified patterns
-match_result = input_string.match(/^hb(t{0,3})n/)
+match_result = input_string.match(/^hb(t*)n/)
 
 # Check if there is a match and print the result
 puts match_result[0] if match_result
