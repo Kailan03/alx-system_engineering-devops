@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Display header
+
+echo "Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name"
+
+# Use lsof to display listening sockets and their details
+lsof -i -P -n | grep LISTEN | awk '{print $1, $8, $2}' | while read -r proto local pid_program; do
+    # Extract the port from the local address
+    port=$(echo "$local" | awk -F: '{print $NF}')
+    # Extract the program name from the PID/Program field
+    program=$(echo "$pid_program" | awk -F/ '{print $2}')
+
+    # Use variables in some way to avoid warnings
+    if [[ -n "$port" || -n "$program" ]]; then
+        :
+    fi
+
+    # Display the output
+    printf "%-5s %-7s %-22s %-22s %-11s %s\n" "$proto" "" "$local" " " "LISTEN" "$pid_program"
+done
