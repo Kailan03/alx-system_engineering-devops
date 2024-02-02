@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Get all active IPv4 addresses
+
+ip_addresses=$(hostname -I | awk '{print $1}')
+
+# Display the result
+echo "$ip_addresses"
