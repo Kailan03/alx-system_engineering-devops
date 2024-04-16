@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+# Ensure the script is run as root
+if [ "$(id -u)" != "0" ]; then
+   echo "This script must be run as root" 1>&2
+   exit 1
+fi
+
+# Install ufw if it is not installed
+if ! command -v ufw > /dev/null 2>&1; then
+    echo "ufw not found, installing..."
+    apt update && apt install ufw -y
+else
+    echo "ufw is already installed."
+fi
+
+# Set default policies
+echo "Setting default policies..."
+ufw default deny incoming
+ufw default allow outgoing
+
+# Allow necessary ports
+echo "Allowing ports 22 (SSH), 80 (HTTP), 443 (HTTPS), and 8080 (for redirection)..."
+ufw allow 22/tcp
+ufw allow 80/tcp
+ufw allow 443/tcp
+ufw allow 8080/tcp
+
+# Enable ufw
+echo "Enabling ufw..."
+ufw enable
+
+# Adding iptables rule for port redirection from 8080 to 80
+echo "Adding iptables rule for port redirection from 8080 to 80..."
+iptables -t nat -A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
+# Make sure iptables rules persist after reboot
+apt-get install iptables-persistent -y
+
+# Provide a status update
+echo "ufw status:"
+ufw status verbose
+
+echo "Firewall configuration completed with port redirection from 8080 to 80."
